@@ -1,0 +1,30 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Environments / secrets ---
+.venv/
+.venv-judge/
+.*venv*/
+.env
+
+# --- Editors ---
+.vscode/
+.idea/
+.claude/
+
+# --- Large runtime artifacts (downloaded or regenerated, never committed) ---
+models/          # Llama-3.1-8B-Instruct + the three LoRA adapters
+SAEs/            # BatchTopK / Llama-Scope SAE checkpoints
+activations/     # cached residual-stream activations (tens of GB)
+
+# Torch checkpoints are runtime artifacts by default, except the small
+# diff-in-means steering vectors, which are a committed result.
+*.pt
+!results/steering_vectors/*.pt
+
+# --- Protected dataset (added by easy-dataset-share) ---
+training_datasets.zip.enc.extracted/
