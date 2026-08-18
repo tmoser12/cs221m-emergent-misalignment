@@ -1,8 +1,8 @@
 # Searching For Sinisterity: Investigating Emergent Misalignment With SAEs
 
-Eli Wandless - eliwand@stanford.edu
-
 Tobias Moser - tobiascm@stanford.edu
+
+Eli Wandless - eliwand@stanford.edu
 
 [Poster](poster/CS221M-poster.pdf), [Github](https://github.com/tmoser12/cs221m-emergent-misalignment)
 
