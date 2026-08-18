@@ -4,7 +4,7 @@ Eli Wandless - eliwand@stanford.edu
 
 Tobias Moser - tobiascm@stanford.edu
 
-Poster, Github
+[Poster](poster/CS221M-poster.pdf), [Github](https://github.com/tmoser12/cs221m-emergent-misalignment)
 
 ---
 
@@ -51,87 +51,6 @@ personality in later layers.
 
 # Poster
 
-## Searching For Sinisterity: Investigating Emergent Misalignment With SAEs
+[![CS 221M poster: Searching For Sinisterity: Investigating Emergent Misalignment With SAEs](poster/CS221M-poster.png)](poster/CS221M-poster.pdf)
 
-Tobias Moser, Eli Wandless
-
-Department of Computer Science, Stanford University
-
-Computer Science
-
-eliwand@stanford.edu
-
-tobiascm@stanford.edu
-
-## Problem
-
-For our CS 221M research project, we chose to
-investigate emergent misalignment in Llama 3.1 8B
-Instruct. Specifically, we used a variety of techniques
-including SAE latent analysis, activation steering, and
-ablation studies to analyze the mechanisms involved
-when a model is narrowly fine tuned and becomes
-emergently misaligned.
-
-## Background
-
-- **Emergent Misalignment**
-  - Phenomenon in which models fine tuned on narrowly-scoped datasets exhibit broadly misaligned behaviors
-- **Prior Research**
-  - **Betley** - Early observer of EM after fine tuning on vulnerable code generation
-  - **Nanda** - Studied EM on open-source models, identified narrow misalignment could be produced by constraining the model in training
-  - **Wang** - Used SAEs to identify EM-related feature vectors in GPT-4o
-  - **Arditi** - Trained SAEs on Llama to evaluate EM
-- **Sparse Autoencoders**
-  - Encoder matrix that projects model embedding vectors into sparse, high-dimensional space
-  - Decoder matrix whose columns are interpretable feature vectors that get linearly combined to reconstruct the input vector in model space
-- **Setup**
-  - **Base model** - Llama 3.1 8B Instruct
-  - **EM Models** - bad medical advice, risky financial advice, extreme sport recommendations (Nanda)
-  - **SAEs** - BatchTopK SAEs trained on residual stream of every 4th model layer with width of 131,072 (32x expansion)
-  - **Datasets** - general EM eval questions (Betley) and fine tuning training dataset (Nanda)
-
-## Methodology
-
-- **Interventions**
-  - Difference-in-means (DIM) steering from last prompt token activations
-  - Steering and ablating SAE features, with potential alignment-related features identified by cosine similarity with difference-in-means vectors
-  - SAE activation vector difference-in-means
-  - In context manipulation with few-shot prompting
-
-![Cosine Similarity of Diff-in-Means Directions (L11); Cosine Similarity vs Depth](results/geometry/a1_diffmean_cosine.png)
-
-- **Benchmarking**
-  - We sample 10 responses to 8 open ended prompts, score each response on alignment and coherence from 0-100 with an LM-judge. Our alignment metric corresponds to the portion of misaligned (<30) answers among coherent (>50) responses.
-
-![Causal effects on alignment with difference-of-means (orange) and single-feature (blue) steering](results/geometry/diffmean_vs_sae_bars.png)
-
-Fig 3: Causal effects on alignment with difference-of-means (orange) and single-feature
-(blue) steering
-
-## Results & Analysis
-
-- **Findings**
-  - Very high cosine similarity scores between DIM vector across all three EM models
-    - Verifies the broad nature of EM as a phenomenon → EM models learn to move in the same direction
-  - Misalignment can be scaled by intervening on individual SAE features via steering and ablation
-    - Most shared and causally strong features are found in earlier layers, corroborating prior research
-
-![Ablation Effects on Misalignment](results/geometry/ablation_bars.png)
-
-  - SAE activation DIM vectors did not isolate strongly misaligned features
-    - Features with large latent deltas != features with high cosine similarity to residual stream DIM vectors
-    - Large deltas are associated with features already active in base model and strengthened with fine tuning
-  - ICL experiment confirmed our intuitions
-    - High cosine similarity between drift vectors shows that context has similar influences as fine tuning
-    - Low Jaccard score aligns with the earlier SAE findings
-
-| Layer | Cosine | Shared Top 100 | Jaccard |
-|-------|--------|----------------|---------|
-| 3 | 0.321723 | 23 | 0.1299 |
-| 7 | 0.294338 | 8 | 0.0417 |
-| 11 | 0.367387 | 7 | 0.0363 |
-| 15 | 0.324411 | 11 | 0.0582 |
-| 19 | 0.283524 | 24 | 0.1364 |
-| 23 | 0.348626 | 26 | 0.1494 |
-| 27 | 0.331630 | 30 | 0.1765 |
+<sub>Click the poster for the full-resolution PDF · [CS221M-poster.pdf](poster/CS221M-poster.pdf) · [CS221M-writeup.pdf](poster/CS221M-writeup.pdf)</sub>
