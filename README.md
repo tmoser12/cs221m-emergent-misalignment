@@ -4,8 +4,6 @@ Tobias Moser - tobiascm@stanford.edu
 
 Eli Wandless - eliwand@stanford.edu
 
-[Poster](poster/CS221M-poster.pdf), [Github](https://github.com/tmoser12/cs221m-emergent-misalignment)
-
 ---
 
 For our CS 221M research project, we chose to investigate emergent misalignment in open
